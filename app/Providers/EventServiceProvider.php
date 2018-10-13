@@ -17,6 +17,22 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+
+        ],
+        'App\Events\ProjectCreated' => [
+            'App\Listeners\ProjectCreatedListener',
+        ],
+        'App\Events\LeadWon' => [
+            'App\Listeners\LeadWonListener',
+        ],
+        'App\Events\LeadLost' => [
+            'App\Listeners\LeadLostListener',
+        ],
+        'App\Events\ContractorCreated' => [
+            'App\Listeners\ContractorCreatedListener',
+        ],
+        'App\Events\ActivityCreated' => [
+            'App\Listeners\ActivityCreatedListener',
         ],
     ];
 

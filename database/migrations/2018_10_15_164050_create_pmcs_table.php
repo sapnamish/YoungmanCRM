@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActivitiesTable extends Migration
+class CreatePmcsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateActivitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('activities', function (Blueprint $table) {
+        Schema::create('pmcs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('project_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('project_id')->references('id')->on('projects')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,6 +31,6 @@ class CreateActivitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activities');
+        Schema::dropIfExists('pmcs');
     }
 }

@@ -15,7 +15,26 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('completion_date')->nullable();
+            $table->longText('address');
+            $table->float('latitude', 9, 6);
+            $table->float('longitude', 9, 6);
+            $table->char('status');
+            $table->softDeletes();
             $table->timestamps();
+        });
+
+        // Create table for associating users to projects (Many-to-Many)
+        Schema::create('user_project', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('project_id')->unsigned();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->primary(['user_id', 'project_id']);
         });
     }
 
@@ -26,6 +45,7 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_project');
         Schema::dropIfExists('projects');
     }
 }

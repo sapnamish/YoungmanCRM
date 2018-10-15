@@ -15,6 +15,11 @@ class CreateContractorsTable extends Migration
     {
         Schema::create('contractors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->bigInteger('phone_number')->nullable();
+            $table->string('city');
+            $table->string('state_code');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,4 +14,12 @@ class Client extends Model
     protected $fillable = [
         'project_id',
     ];
+
+    /**
+     * Get the Project that owns the Pmc.
+     */
+    public function pmc()
+    {
+        return $this->belongsTo('App\Project');
+    }
 }

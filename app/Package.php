@@ -14,4 +14,12 @@ class Package extends Model
     protected $fillable = [
         'package_name', 'status',
     ];
+
+    /**
+     * The Projects that belong to the Package.
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project', 'package_project');
+    }
 }

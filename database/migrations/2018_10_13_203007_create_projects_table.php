@@ -20,8 +20,20 @@ class CreateProjectsTable extends Migration
             $table->float('latitude', 9, 6);
             $table->float('longitude', 9, 6);
             $table->char('status');
+            $table->integer('pmc_id')->unsigned()->nullable();
+            $table->integer('client_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('pmc_id')->references('id')->on('pmcs')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('client_id')->references('id')->on('clients')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('usesrs')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         // Create table for associating users to projects (Many-to-Many)

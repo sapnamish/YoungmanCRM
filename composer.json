@@ -12,6 +12,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "laravelcollective/html": "^5.4.0",
+        "spatie/geocoder": "^3.3",
         "tcg/voyager": "^1.1"
     },
     "require-dev": {

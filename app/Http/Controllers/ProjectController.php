@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Services\ProjectService;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    protected $projectService;
+
+    public function __construct()
+    {
+        $this->projectService = new ProjectService();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = $this->projectService->all();
+
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -23,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -34,7 +46,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'address'=> 'required',
+            'completion_date' => 'required'
+        ]);
+
+        if($this->projectService->store($request))
+            return redirect('/project')->with('success', 'Project has been added');
+        else
+            return redirect('/project')->with('error', 'Project could not be saved');
     }
 
     /**
@@ -45,7 +66,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = $this->projectService->show($id);dd($project);
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -56,7 +78,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = $this->projectService->show($id);
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -79,6 +102,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->projectService->destroy($id);
+
+        return redirect('/shares')->with('success', 'Stock has been deleted Successfully');
     }
 }

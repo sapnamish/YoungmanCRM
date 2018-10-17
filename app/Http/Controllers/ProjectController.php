@@ -28,6 +28,11 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects'));
     }
 
+    public function allJson()
+    {
+        return $this->projectService->all()->toJson();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

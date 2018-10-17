@@ -33,7 +33,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-link" href="{{ route('project.index') }}">{{ __('Projects') }}</a>
+                        @guest
+
+                        @else
+                            <a class="nav-link" href="{{ route('project.index') }}">{{ __('Projects') }}</a>
+                            <a class="nav-link" href="{{ route('contractor.index') }}">{{ __('Contractors') }}</a>
+                            <a class="nav-link" href="{{ route('package.index') }}">{{ __('Packages') }}</a>
+                        @endguest
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

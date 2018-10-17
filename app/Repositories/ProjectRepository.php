@@ -12,9 +12,9 @@ class ProjectRepository
         return Project::all();
     }
 
-    public function store(Request $request)
+    public function store($input)
     {
-        $project = new Project($request->all());
+        $project = new Project($input);
         $project->save();
     }
 

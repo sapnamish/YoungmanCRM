@@ -21,10 +21,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('project', 'ProjectController');
 
-Route::resource('activity', 'ActivityController');
+Route::resource('contractor', 'ContractorController');
 
-Route::resource('project', 'ProjectController');
+Route::resource('package', 'PackageController');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/projectsJson', 'ProjectController@allJson')->name('projectsJson');

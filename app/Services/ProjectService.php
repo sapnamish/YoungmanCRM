@@ -4,6 +4,7 @@ use App\Repositories\ProjectRepository;
 use DB;
 use Geocoder;
 use Illuminate\Http\Request;
+use Auth;
 
 class ProjectService
 {
@@ -22,15 +23,20 @@ class ProjectService
     public function store(Request $request)
     {
 
+            $location_data = Geocoder::getCoordinatesForAddress($request->address);
 
-           // $data = Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
-
-           // dd($data);
-
-            $this->projectRepository->store($request);
-
-
-
+            $input = array(
+                'name'=> $request->name,
+                'completion_date' => $request->completion_date,
+                'address' => $location_data['formatted_address'],
+                'latitude' => $location_data['lat'],
+                'longitude' =>$location_data['lng'],
+                'status' => 'N',
+                'pmc_id' => null,
+                'client_id' => null,
+                'user_id' => Auth::user()->id
+            );
+            $this->projectRepository->store($input);
     }
 
     public function destroy($id)

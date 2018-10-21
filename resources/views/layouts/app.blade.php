@@ -18,6 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        #googleMap {
+            width: 100%;
+            height: 400px;
+            background-color: grey;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -79,7 +87,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4 container">
             @yield('content')
         </main>
     </div>

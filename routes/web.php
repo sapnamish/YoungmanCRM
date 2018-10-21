@@ -30,3 +30,4 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/projectsJson', 'ProjectController@allJson')->name('projectsJson');
+

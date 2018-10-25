@@ -34,7 +34,8 @@ class ProjectService
                 'status' => 'N',
                 'pmc_id' => null,
                 'client_id' => null,
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
+                'created_by' => Auth::user()->id
             );
             $this->projectRepository->store($input);
     }

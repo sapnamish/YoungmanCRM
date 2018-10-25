@@ -31,7 +31,6 @@
     </div>
 
 
-git a
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY', 'YOUR_GOOGLE_MAPS_API_KEY')  }}&sensor=falsesensor=false&v=3"></script>
     <script type="text/javascript">
         function initialize_map() {

@@ -2,7 +2,6 @@
 
 use DB;
 use App\Project;
-use Illuminate\Http\Request;
 
 class ProjectRepository
 {

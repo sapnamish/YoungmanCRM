@@ -162,6 +162,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Geocoder\GeocoderServiceProvider::class,
+        FarhanWazir\GoogleMaps\GMapsServiceProvider::class,
     ],
 
     /*
@@ -213,6 +214,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
+        'GMaps' => FarhanWazir\GoogleMaps\Facades\GMapsFacade::class,
     ],
 
 ];

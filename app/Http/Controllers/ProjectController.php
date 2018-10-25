@@ -109,6 +109,6 @@ class ProjectController extends Controller
     {
         $this->projectService->destroy($id);
 
-        return redirect('/shares')->with('success', 'Stock has been deleted Successfully');
+        return redirect('/project')->with('success', 'Project has been deleted Successfully');
     }
 }

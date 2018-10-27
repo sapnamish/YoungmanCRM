@@ -37,7 +37,7 @@ class ContractorService
             'phone_number' => $request->phone_number
         );
 
-        $this->contractorRepository->store($input);
+        return $this->contractorRepository->store($input);
     }
 
     public function destroy($id)

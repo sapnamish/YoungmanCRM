@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ContractorService;
 use Illuminate\Http\Request;
 
-class ContractorController extends Controller
+class PackageController extends Controller
 {
-
-    protected $contractorService;
-
-    public function __construct()
-    {
-        $this->contractorService = new ContractorService();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +13,7 @@ class ContractorController extends Controller
      */
     public function index()
     {
-        $contractors = $this->contractorService->all();
-
-        return view('contractors.index', compact('contractors'));
+        //
     }
 
     /**
@@ -34,7 +23,7 @@ class ContractorController extends Controller
      */
     public function create()
     {
-        return view('contractors.create_or_update');
+        //
     }
 
     /**
@@ -45,18 +34,7 @@ class ContractorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'email'=> 'required',
-            'state_code' => 'required',
-            'city' => 'required',
-            'phone_number' =>'required'
-        ]);
-
-        if($this->contractorService->store($request))
-            return redirect('/contractor')->with('success', 'Contractor has been added');
-        else
-            return redirect('/contractor')->with('error', 'Contractor could not be saved');
+        //
     }
 
     /**
@@ -67,8 +45,7 @@ class ContractorController extends Controller
      */
     public function show($id)
     {
-        $contractor = $this->contractorService->show($id);
-        return view('contractors.show', compact('project'));
+        //
     }
 
     /**
@@ -79,8 +56,7 @@ class ContractorController extends Controller
      */
     public function edit($id)
     {
-        $contractor = $this->contractorService->show($id);
-        return view('contractors.create_or_update', compact('project'));
+        //
     }
 
     /**
@@ -103,8 +79,6 @@ class ContractorController extends Controller
      */
     public function destroy($id)
     {
-        $this->contractorService->destroy($id);
-
-        return redirect('/contractor')->with('success', 'Contractor has been deleted Successfully');
+        //
     }
 }

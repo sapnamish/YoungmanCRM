@@ -22,6 +22,7 @@ class ContractorRepository
     {
         $contractor = new Contractor($input);
         $contractor->save();
+        return true;
     }
 
     public function destroy($id)

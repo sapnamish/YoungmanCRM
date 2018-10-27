@@ -8,7 +8,7 @@
     </style>
     <div class="card uper">
         <div class="card-header">
-            Create Project
+            Create Contractor
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -20,7 +20,12 @@
                     </ul>
                 </div><br />
             @endif
-                {{Form::open(array('route' => 'contractor.store', 'method' => 'post'))}}
+                @if(isset($contractor))
+                    {{ Form::model($contractor,  ['route' => ['contractor.store', $contractor->id], 'method' => 'patch']) }}
+                @else
+                    {{Form::open(array('route' => 'contractor.store', 'method' => 'post'))}}
+                @endif…
+
             <!-- name -->
                 {{ Form::label('name', 'Contractor Name') }}
                 {{ Form::text('name') }}
@@ -31,15 +36,15 @@
 
             <!-- phone_number -->
                 {{ Form::label('phone_number', 'Phone Number') }}
-                {{ Form::date('phone_number') }}
+                {{ Form::text('phone_number') }}
 
             <!-- city -->
                 {{ Form::label('city', 'City') }}
-                {{ Form::date('city') }}
+                {{ Form::text('city') }}
 
             <!-- phone_number -->
                 {{ Form::label('state_code', 'State Code') }}
-                {{ Form::date(' state_code') }}
+                {{ Form::text(' state_code') }}
 
                 {{ Form::submit('Create Contractor!') }}
 

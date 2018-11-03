@@ -12,7 +12,7 @@ class Pmc extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id',
+        'name', 'email', 'phone_number',
     ];
 
     /**
@@ -20,6 +20,6 @@ class Pmc extends Model
      */
     public function pmc()
     {
-        return $this->belongsTo('App\Project');
+        return $this->belongsToMany('App\Project');
     }
 }

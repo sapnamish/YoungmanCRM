@@ -111,4 +111,40 @@ class ProjectController extends Controller
 
         return redirect('/project')->with('success', 'Project has been deleted Successfully');
     }
+
+    public function attachPMC(Request $request)
+    {
+        $request->validate([
+            'project_id'=>'required',
+            'pmc_id'=> 'required',
+            'pmc_name' => 'required',
+        ]);
+
+        $redirect_to = $request->redirect_to;
+        if($redirect_to == null || $redirect_to == "")
+            $redirect_to = "/project";
+
+        if($this->projectService->attachPMC($request))
+            return redirect($redirect_to)->with('success', 'PMC has been attached');
+        else
+            return redirect($redirect_to)->with('error', 'PMC could not be attached');
+    }
+
+    public function attachClient(Request $request)
+    {
+        $request->validate([
+            'project_id'=>'required',
+            'client_id'=> 'required',
+            'client_name' => 'required',
+        ]);
+
+        $redirect_to = $request->redirect_to;
+        if($redirect_to == null || $redirect_to == "")
+            $redirect_to = "/project";
+
+        if($this->projectService->attachClient($request))
+            return redirect($redirect_to)->with('success', 'Client has been attached');
+        else
+            return redirect($redirect_to)->with('error', 'Client could not be attached');
+    }
 }

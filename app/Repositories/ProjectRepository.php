@@ -8,7 +8,7 @@ class ProjectRepository
 
     public function all()
     {
-        return Project::all();
+        return Project::with('user', 'pmc', 'client')->get();
     }
 
     public function store($input)
@@ -31,6 +31,20 @@ class ProjectRepository
     public function show($id)
     {
         return Project::find($id);
+    }
+
+    public function attachPMC($pmcId, $projectId)
+    {
+        $project = Project::find($projectId);
+        $project->pmc_id = $pmcId;
+        $project->save();
+    }
+
+    public function attachClient($clientId, $projectId)
+    {
+        $project = Project::find($projectId);
+        $project->client_id = $clientId;
+        $project->save();
     }
 
 }

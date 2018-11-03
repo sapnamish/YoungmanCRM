@@ -15,12 +15,11 @@ class CreatePmcsTable extends Migration
     {
         Schema::create('pmcs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('project_id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->bigInteger('phone_number')->unique();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('project_id')->references('id')->on('projects')
-                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

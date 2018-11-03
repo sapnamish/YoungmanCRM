@@ -25,9 +25,36 @@ Route::resource('contractor', 'ContractorController');
 
 Route::resource('package', 'PackageController');
 
+Route::resource('pmc', 'PmcController');
+
+Route::resource('client', 'ClientController');
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
 Route::get('/projectsJson', 'ProjectController@allJson')->name('projectsJson');
 
+Route::get('searchPMC',
+    [
+        'as'=>'searchPMC',
+        'uses'=>'PmcController@search'
+    ]);
+
+Route::post('attachPMC',
+    [
+        'as'=>'attachPMC',
+        'uses'=>'ProjectController@attachPMC'
+    ]);
+
+Route::get('searchClient',
+    [
+        'as'=>'searchClient',
+        'uses'=>'ClientController@search'
+    ]);
+
+Route::post('attachClient',
+    [
+        'as'=>'attachClient',
+        'uses'=>'ProjectController@attachClient'
+    ]);

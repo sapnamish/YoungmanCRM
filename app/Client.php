@@ -12,7 +12,7 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id',
+        'name', 'email', 'phone_number',
     ];
 
     /**

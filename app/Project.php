@@ -20,7 +20,7 @@ class Project extends Model
      */
     public function pmc()
     {
-        return $this->hasOne('App\Pmc');
+        return $this->belongsTo('App\Pmc');
     }
 
     /**
@@ -28,7 +28,7 @@ class Project extends Model
      */
     public function client()
     {
-        return $this->hasOne('App\Client');
+        return $this->belongsTo('App\Client');
     }
 
     /**

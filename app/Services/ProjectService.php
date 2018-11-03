@@ -54,4 +54,14 @@ class ProjectService
     {
         return $this->projectRepository->show($id);
     }
+
+    public function attachPMC(Request $request)
+    {
+        $this->projectRepository->attachPMC($request->pmc_id, $request->project_id);
+    }
+
+    public function attachClient(Request $request)
+    {
+        $this->projectRepository->attachClient($request->client_id, $request->project_id);
+    }
 }

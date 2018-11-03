@@ -96,7 +96,6 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -147,4 +146,22 @@ class ProjectController extends Controller
         else
             return redirect($redirect_to)->with('error', 'Client could not be attached');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $type = $request->type;
+        $type = strtoupper($type);
+
+        $isUpdated = false;
+
+        $isUpdated = $this->projectService->updateStatus($request);
+
+        if($isUpdated){
+            return redirect("/project")->with('success', 'Updated successfully');
+        }
+        else{
+            return redirect("/project")->with('error', 'Could not update');
+        }
+    }
+
 }

@@ -14,7 +14,10 @@ class ProjectRepository
     public function store($input)
     {
         $project = new Project($input);
-        $project->save();
+        if($project->save()){
+            return $project->id;
+        }
+        return null;
     }
 
     public function destroy($id)
@@ -45,6 +48,19 @@ class ProjectRepository
         $project = Project::find($projectId);
         $project->client_id = $clientId;
         $project->save();
+    }
+
+    public function updateStatus($projectId, $newStatus)
+    {
+        $project = Project::find($projectId);
+        $project->status = $newStatus;
+        $project->save();
+    }
+
+    public function logProjectStatus($projectId, $status, $comments)
+    {
+        DB::insert("INSERT INTO project_status_log ( project_id, status, comment, created_at, updated_at) 
+                    VALUES (?, ?, ?, CURRENT_TIMESTAMP , CURRENT_TIMESTAMP ) ", [$projectId, $status, $comments]);
     }
 
 }

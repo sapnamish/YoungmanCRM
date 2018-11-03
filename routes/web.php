@@ -58,3 +58,9 @@ Route::post('attachClient',
         'as'=>'attachClient',
         'uses'=>'ProjectController@attachClient'
     ]);
+
+Route::get('updateProjectStatus',
+    [
+        'as'=>'updateProjectStatus',
+        'uses'=>'ProjectController@updateStatus'
+    ]);

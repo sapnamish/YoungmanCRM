@@ -79,13 +79,27 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
+                    <div id="statusChange">
+
+                        <div class="form-group" id="statusUpdateDiv">
+                            <label for="sel1">Choose Status</label>
+                            <select class="selectpicker" id="statusSelect" data-style="btn-primary" onchange="updateStatus(this)" data-max-options="1">
+                                <option value="N">New</option>
+                                <option value="W">Won</option>
+                                <option value="R">Rejected</option>
+                                <option value="H">Hot</option>
+                            </select>
+                        </div>
+
+
+                    </div>
                     <div class="dropdown">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             Actions
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" id="view">View Full Details</a>
-                            <a class="dropdown-item" href="#">Change Status</a>
+                            <a class="dropdown-item" href="#" onclick="$('#statusUpdateDiv').show();">Change Status</a>
                             <a class="dropdown-item" href="#">Add Activity</a>
                         </div>
                     </div>
@@ -375,6 +389,7 @@
                                     $("#projectDetails #address").html( markers[i].address );
                                     $("#projectDetails #completion_date").html( markers[i].completion_date );
                                     $("#projectDetails #status").html( markers[i].status );
+                                    $("#projectDetails #statusSelect").attr("data-project-id", markers[i].id);
                                     if(markers[i].pmc_id === null || markers[i].pmc_id === undefined || markers[i].pmc_id == "")
                                     {   var html = '<div class="col-xs-12">';
                                         html += '<button type="button" class="btn btn-success btn-sm attach-pmc" onclick="attachPMC(this)" data-project-id ="' + markers[i].id + '" style="margin-right:5px;">Attach existing PMC</button>';
@@ -402,6 +417,7 @@
                                     $("#projectDetails #created_at").html( markers[i].created_at );
                                     $("#projectDetails #updated_at").html( markers[i].updated_at );
                                     $("#projectDetails #view").attr( 'href', window.location.href + "/" + markers[i].id );
+                                    $("#statusUpdateDiv").hide();
                                     $('#projectDetails').modal('show');
                                 });
                             })(marker, i);
@@ -433,6 +449,10 @@
     <script>
         "use strict";
 
+        var srcPmc = "{{ route('searchPMC') }}";
+        var srcClient = "{{ route('searchClient') }}";
+        var updateProjectStatus = "{{ route('updateProjectStatus') }}";
+
         function createPMC(btn) {
             $("#createPMC input[name='project_id']").val(btn.getAttribute("data-project-id"));
             $('#projectDetails').modal('hide');
@@ -457,11 +477,23 @@
             $('#searchClient').modal('show');
         }
 
+        function updateStatus(select) {
 
-        var srcPmc = "{{ route('searchPMC') }}";
-        var srcClient = "{{ route('searchClient') }}";
-
-
+            var status = $('.selectpicker').val();
+            // Make an ajax call to update the status
+            $.ajax({
+                url: updateProjectStatus,
+                dataType: "json",
+                data: {
+                    status : status,
+                    project_id : select.getAttribute("data-project-id")
+                },
+                success: function(data) {
+                    $("#statusUpdateDiv").hide();
+                    initialize_map();
+                }
+            });
+        }
 
         $("#searchPMCInput").autocomplete({
 
@@ -502,6 +534,9 @@
             },
             minLength: 3,
         });
+
+
+
     </script>
 
 @endsection

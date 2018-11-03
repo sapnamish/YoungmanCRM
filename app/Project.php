@@ -15,6 +15,12 @@ class Project extends Model
         'completion_date', 'address','name', 'latitude', 'longitude', 'status', 'user_id', 'created_by',
     ];
 
+    const STATUS_NEW = 'N';
+    const STATUS_WON = 'W';
+    const STATUS_REJECTED = 'R';
+    const STATUS_HOT = 'H';
+
+
     /**
      * Get the PMC record associated with the project.
      */

@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 
+use App\Project;
 use App\Repositories\ProjectRepository;
 use DB;
 use Geocoder;
@@ -37,7 +38,13 @@ class ProjectService
                 'user_id' => Auth::user()->id,
                 'created_by' => Auth::user()->id
             );
-            $this->projectRepository->store($input);
+
+        DB::transaction(function() use ($input)
+        {
+            $lastInsertId = $this->projectRepository->store($input);
+            $this->projectRepository->logProjectStatus($lastInsertId,Project::STATUS_NEW, "");
+        });
+
     }
 
     public function destroy($id)
@@ -63,5 +70,47 @@ class ProjectService
     public function attachClient(Request $request)
     {
         $this->projectRepository->attachClient($request->client_id, $request->project_id);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $status_raw = $request->status;
+        $project_id = $request->project_id;
+        $comments = $request->comment;
+        if($comments == null) $comments = "";
+        $status = null;
+
+        try{
+            switch($status_raw)
+            {
+                case 'N':
+                    $status = Project::STATUS_NEW;
+                    break;
+                case 'W':
+                    $status = Project::STATUS_WON;
+                    break;
+                case 'R':
+                    $status = Project::STATUS_REJECTED;
+                    break;
+                case 'H':
+                    $status = Project::STATUS_HOT;
+                    break;
+                default:
+                    throw new \Exception("Invalid project status code");
+                    break;
+            }
+
+            DB::transaction(function() use ($project_id, $status, $comments)
+            {
+                $this->projectRepository->updateStatus($project_id, $status);
+                $this->projectRepository->logProjectStatus($project_id,$status, $comments);
+            });
+
+            return true;
+        }
+        catch (\Exception $e){
+            return false;
+        }
+
     }
 }

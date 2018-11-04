@@ -64,3 +64,27 @@ Route::get('updateProjectStatus',
         'as'=>'updateProjectStatus',
         'uses'=>'ProjectController@updateStatus'
     ]);
+
+Route::get('searchContractor',
+    [
+        'as'=>'searchContractor',
+        'uses'=>'ContractorController@search'
+    ]);
+
+Route::post('attachContractorToPackage',
+    [
+        'as'=>'attachContractorToPackage',
+        'uses'=>'PackageController@attachContractor'
+    ]);
+
+Route::get('searchProject',
+    [
+        'as'=>'searchProject',
+        'uses'=>'ProjectController@search'
+    ]);
+
+Route::post('attachProjectToPackage',
+    [
+        'as'=>'attachProjectToPackage',
+        'uses'=>'PackageController@attachProject'
+    ]);

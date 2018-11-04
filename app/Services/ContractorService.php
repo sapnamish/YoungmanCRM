@@ -54,4 +54,17 @@ class ContractorService
     {
         return $this->contractorRepository->show($id);
     }
+
+    public function search($term)
+    {
+        $clients = $this->contractorRepository->search($term);
+        $data=array();
+        foreach ($clients as $client) {
+            $data[]=array(
+                'value'=>$client->name,
+                'id'=>$client->id,
+            );
+        }
+        return $data;
+    }
 }

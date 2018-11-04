@@ -40,4 +40,8 @@ class ContractorRepository
     {
         return Contractor::find($id);
     }
+
+    public function search($term){
+        return Contractor::where('name','LIKE','%'.$term.'%')->get();
+    }
 }

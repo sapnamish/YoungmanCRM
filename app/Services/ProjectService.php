@@ -113,4 +113,17 @@ class ProjectService
         }
 
     }
+
+    public function search($term)
+    {
+        $pmcs = $this->projectRepository->search($term);
+        $data=array();
+        foreach ($pmcs as $pmc) {
+            $data[]=array(
+                'value'=>$pmc->name,
+                'id'=>$pmc->id,
+            );
+        }
+        return $data;
+    }
 }

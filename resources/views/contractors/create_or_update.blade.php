@@ -24,27 +24,33 @@
                     {{ Form::model($contractor,  ['route' => ['contractor.store', $contractor->id], 'method' => 'patch']) }}
                 @else
                     {{Form::open(array('route' => 'contractor.store', 'method' => 'post'))}}
-                @endif…
+                @endif
 
             <!-- name -->
+                <div class="form-group">
                 {{ Form::label('name', 'Contractor Name') }}
-                {{ Form::text('name') }}
-
+                {{ Form::text('name',$value = null, array('class' => 'form-control')) }}
+                </div>
             <!-- email -->
+                    <div class="form-group">
                 {{ Form::label('email', 'Email') }}
-                {{ Form::text('email') }}
-
+                {{ Form::text('email',$value = null, array('class' => 'form-control')) }}
+                    </div>
             <!-- phone_number -->
+                    <div class="form-group">
                 {{ Form::label('phone_number', 'Phone Number') }}
-                {{ Form::text('phone_number') }}
-
+                {{ Form::text('phone_number',$value = null, array('class' => 'form-control')) }}
+                    </div>
             <!-- city -->
+                    <div class="form-group">
                 {{ Form::label('city', 'City') }}
-                {{ Form::text('city') }}
-
+                {{ Form::text('city',$value = null, array('class' => 'form-control')) }}
+                    </div>
             <!-- phone_number -->
+                    <div class="form-group">
                 {{ Form::label('state_code', 'State Code') }}
-                {{ Form::text(' state_code') }}
+                {{ Form::text(' state_code',$value = null, array('class' => 'form-control')) }}
+                    </div>
 
                 {{ Form::submit('Create Contractor!') }}
 

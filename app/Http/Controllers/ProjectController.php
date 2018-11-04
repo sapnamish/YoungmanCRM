@@ -164,4 +164,13 @@ class ProjectController extends Controller
         }
     }
 
+    public function search(Request $request){
+        $query = $request->get('term','');
+        $data = $this->projectService->search($query);
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No Result Found','id'=>''];
+    }
+
 }

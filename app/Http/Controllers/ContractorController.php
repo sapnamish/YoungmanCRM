@@ -68,7 +68,7 @@ class ContractorController extends Controller
     public function show($id)
     {
         $contractor = $this->contractorService->show($id);
-        return view('contractors.show', compact('project'));
+        return view('contractors.show', compact('contractor'));
     }
 
     /**
@@ -106,5 +106,14 @@ class ContractorController extends Controller
         $this->contractorService->destroy($id);
 
         return redirect('/contractor')->with('success', 'Contractor has been deleted Successfully');
+    }
+
+    public function search(Request $request){
+        $query = $request->get('term','');
+        $data = $this->contractorService->search($query);
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No Result Found','id'=>''];
     }
 }

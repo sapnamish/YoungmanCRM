@@ -22,6 +22,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 
+    <!-- Jquery UI -->
+    <link href="{{ asset('jquery-ui-1.12.1/jquery-ui.css') }}" rel="Stylesheet"/>
+    <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}" ></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

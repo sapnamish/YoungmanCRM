@@ -442,10 +442,6 @@
 
     </script>
 
-    <!-- Jquery UI -->
-    <link href="{{ asset('jquery-ui-1.12.1/jquery-ui.css') }}" rel="Stylesheet"/>
-    <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}" ></script>
-
     <script>
         "use strict";
 

@@ -63,4 +63,7 @@ class ProjectRepository
                     VALUES (?, ?, ?, CURRENT_TIMESTAMP , CURRENT_TIMESTAMP ) ", [$projectId, $status, $comments]);
     }
 
+    public function search($term){
+        return Project::where('name','LIKE','%'.$term.'%')->get();
+    }
 }

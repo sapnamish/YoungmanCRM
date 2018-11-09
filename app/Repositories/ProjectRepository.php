@@ -33,7 +33,7 @@ class ProjectRepository
 
     public function show($id)
     {
-        return Project::find($id);
+        return Project::with('user', 'pmc', 'client', 'activity')->find($id);
     }
 
     public function attachPMC($pmcId, $projectId)

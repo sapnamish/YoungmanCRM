@@ -22,4 +22,9 @@ class Package extends Model
     {
         return $this->belongsToMany('App\Project', 'package_project');
     }
+
+    public function activity()
+    {
+        return $this->hasMany('App\PackageActivity');
+    }
 }

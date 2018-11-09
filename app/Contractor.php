@@ -14,4 +14,9 @@ class Contractor extends Model
     protected $fillable = [
         'name', 'email', 'phone_number', 'city', 'state_code',
     ];
+
+    public function activity()
+    {
+        return $this->hasMany('App\ContractorActivity');
+    }
 }

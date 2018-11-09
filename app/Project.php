@@ -55,6 +55,6 @@ class Project extends Model
 
     public function activity()
     {
-        return $this->hasMany('App\ProjectActivity', 'project_activities');
+        return $this->hasMany('App\ProjectActivity');
     }
 }

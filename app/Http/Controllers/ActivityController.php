@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ActivityService;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+
+    protected $activityService;
+
+    public function __construct()
+    {
+        $this->activityService = new ActivityService();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +33,6 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -34,7 +43,16 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'resource_id' => 'required',
+            'resource_type' => 'required',
+            'description' => 'required',
+        ]);
+
+        $status = $this->activityService->store($request);
+
+        dd($status);
+
     }
 
     /**

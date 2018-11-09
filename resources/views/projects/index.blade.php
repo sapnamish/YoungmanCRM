@@ -21,6 +21,8 @@
         </div>
     @endif
 
+    @include('activity.partial_activity_modal')
+
     <!-- The Project Info Modal -->
     <div class="modal fade" id="projectDetails">
         <div class="modal-dialog">
@@ -100,7 +102,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" id="view">View Full Details</a>
                             <a class="dropdown-item" href="#" onclick="$('#statusUpdateDiv').show();">Change Status</a>
-                            <a class="dropdown-item" href="#">Add Activity</a>
+                            <a class="dropdown-item" id="addActivityBtn" onclick="showAddActivityModal(this);">Add Activity</a>
                         </div>
                     </div>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -417,6 +419,8 @@
                                     $("#projectDetails #created_at").html( markers[i].created_at );
                                     $("#projectDetails #updated_at").html( markers[i].updated_at );
                                     $("#projectDetails #view").attr( 'href', window.location.href + "/" + markers[i].id );
+                                    $("#addActivityBtn").attr('data-resource-id', markers[i].id);
+                                    $("#addActivityBtn").attr('data-resource-type', "projectActivity");
                                     $("#statusUpdateDiv").hide();
                                     $('#projectDetails').modal('show');
                                 });
@@ -437,14 +441,10 @@
         }
 
         google.maps.event.addDomListener(window, "load", initialize_map);
-
-
-
     </script>
 
     <script>
         "use strict";
-
         var srcPmc = "{{ route('searchPMC') }}";
         var srcClient = "{{ route('searchClient') }}";
         var updateProjectStatus = "{{ route('updateProjectStatus') }}";

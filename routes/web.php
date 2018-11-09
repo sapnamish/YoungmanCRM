@@ -29,6 +29,8 @@ Route::resource('pmc', 'PmcController');
 
 Route::resource('client', 'ClientController');
 
+Route::resource('activity', 'ActivityController');
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

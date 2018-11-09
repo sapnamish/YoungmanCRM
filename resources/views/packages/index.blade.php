@@ -23,6 +23,8 @@
 
     @endif
 
+    @include('activity.partial_activity_modal')
+
     <!-- The cerate Package Modal -->
     <div class="modal fade" id="createPackageModal">
         <div class="modal-dialog">
@@ -155,7 +157,7 @@
                             <a href="{{ route('package.show', $package->id) }}" class="btn btn-primary" >Show</a>
                             <button class="btn btn-outline-info" data-package-id="{{ $package->id }}" onclick="showSearchContractor(this)">Add to Contractor</button>
                             <button class="btn btn-outline-info" data-package-id="{{ $package->id }}" onclick="showSearchProject(this)">Add to Project</button>
-                            <button class="btn btn-outline-dark">Add Activity</button>
+                            <button class="btn btn-outline-dark" data-resource-id="{{ $package->id }}" data-resource-type="packageActivity" onclick="showAddActivityModal(this);">Add Activity</button>
                         </td>
                     </tr>
                 @endforeach
